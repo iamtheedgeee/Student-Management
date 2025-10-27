@@ -9,7 +9,7 @@ load_dotenv(".env.production")
 
 app=Flask(__name__)
 
-CORS(app,supports_credentials=True, origins=['http://localhost:3000'])
+CORS(app,supports_credentials=True, origins=['http://localhost:3000','https://student-management-two-snowy.vercel.app'])
 
 DB_NAME=os.getenv("DB_NAME")
 PASSWORD=os.getenv("PASSWORD")
