@@ -1,7 +1,10 @@
-import { get_data } from "@/services/api";
+import { get_data, Score } from "@/services/api";
 
 export default async function response() {
-    const results= await get_data()
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/scores`, { cache: "no-store" });
+    const data= await res.json();
+    const results:Score[]=data.results
+
     console.log(results)
     return (
         <div className="overflow-x-auto">
