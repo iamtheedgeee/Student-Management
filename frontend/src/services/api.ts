@@ -42,7 +42,7 @@ export const sendFileForImport= async(file:FormData)=>{
 
 export const get_data= async()=>{
     try{
-        const res= await api.get('/get-results')
+        const res= await api.get('/get-results',{headers: { "Cache-Control": "no-store" }})
         const results:Score[]=res?.data.results
         return results
     } catch(error:unknown){
