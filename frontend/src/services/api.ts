@@ -2,6 +2,9 @@ import axios, { AxiosError, AxiosInstance } from "axios"
 console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
 export const api:AxiosInstance=axios.create({
     baseURL:process.env.NEXT_PUBLIC_API_BASE_URL,
+    headers: {
+    "Cache-Control": "no-store",
+    },
     withCredentials:true
 })
 export interface Score{
@@ -42,7 +45,7 @@ export const sendFileForImport= async(file:FormData)=>{
 
 export const get_data= async()=>{
     try{
-        const res= await api.get('/get-results',{headers: { "Cache-Control": "no-store" }})
+        const res= await api.get('/get-results',{ next: { revalidate: 0 } } as any)
         const results:Score[]=res?.data.results
         return results
     } catch(error:unknown){
