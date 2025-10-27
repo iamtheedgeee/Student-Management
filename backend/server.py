@@ -15,10 +15,9 @@ DB_NAME=os.getenv("DB_NAME")
 PASSWORD=os.getenv("PASSWORD")
 USER=os.getenv("USER")
 HOST=os.getenv("HOST")
-PORT=os.getenv("PORT")
+DB_PORT=os.getenv("DB_PORT")
 
-print(USER)
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}?charset=utf8mb4"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
