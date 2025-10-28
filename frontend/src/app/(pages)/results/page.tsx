@@ -1,7 +1,7 @@
 import { get_data, Score } from "@/services/api";
 
 export default async function response() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-results`, { cache: "no-store" });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/get-results`, { cache: "no-store" });
     const data= await res.json();
     const results:Score[]=data.results
 
