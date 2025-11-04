@@ -8,15 +8,21 @@ export const api:AxiosInstance=axios.create({
     withCredentials:true
 })
 export interface Score{
-    student_name:string
-    first_assessment:number|''
-    second_assessment:number|''
-    exam_score:number|''
+    student_name:string;
+    first_assessment:string;
+    second_assessment:string;
+    exam_score:string;
 }
-export const postResults=async (results:Score):Promise<Score|undefined>=>{
+
+export interface UScore extends Score{
+    id:string;
+    total:number;
+    grade:string;
+}
+export const postResults=async (results:Score):Promise<UScore|undefined>=>{
     try{
         const res= await api.post('/post-result',results)
-        const data:Score=res?.data.recieved
+        const data:UScore=res?.data.recieved
         return data
     } catch(error:unknown){
         console.log(error)
@@ -39,20 +45,39 @@ export const sendFileForImport= async(file:FormData)=>{
         if(error instanceof AxiosError){
             throw new Error(error.response?.data.error)
         }
-        throw new Error('Something Went Horribly wrong lol')
+        throw new Error('Something Went wrong')
     }
 }
 
-export const get_data= async()=>{
+export const getData= async()=>{
     try{
-        const res= await api.get('/get-results',{ next: { revalidate: 0 } } as any)
-        const results:Score[]=res?.data.results
-        return results
+        const res= await api.get('/get-results')
+        if(res.status===200){
+            const results:UScore[]=res?.data.results
+            return results
+        }
+       
     } catch(error:unknown){
         console.log(error)
         if(error instanceof AxiosError){
             throw new Error(error.response?.data.error)
         }
-        throw new Error('Something Went Horribly wrong lol')
+        throw new Error('Something Went wrong')
+    }
+}
+
+export const editData=async()=>{
+    return
+}
+
+export const deleteData=async(selected:string[])=>{
+    try{
+        const res= await api.delete('/delete-result',{data:{selected}})
+        if(res.status===200){
+            return
+        }
+    } catch(error:unknown){
+        console.log(error)
+        throw new Error('something went wrong')
     }
 }

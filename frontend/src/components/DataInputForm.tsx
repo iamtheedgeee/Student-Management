@@ -3,6 +3,7 @@ import { Formik,Form,Field,ErrorMessage } from "formik"
 import * as Yup from 'yup'
 import { postResults } from "@/services/api"
 import { Score } from "@/services/api"
+import { useDataContext } from "@/services/DataContext"
 
 const ScoreSchema=Yup.object().shape({
     student_name:Yup.string()
@@ -32,6 +33,7 @@ const initialValues:Score={
     exam_score:''
 }
 export default function DataInputForm(){
+    const {getResults}=useDataContext()
     return(
         <div className="flex flex-col justify-center items-center border rounded-sm border-black p-[5px] gap-y-<5>">
             <h4 className="text-center border border-black rounded-sm">Input Student Data</h4>
@@ -45,6 +47,7 @@ export default function DataInputForm(){
                         if(data){
                             console.log(data)
                             setStatus('success')
+                            getResults()
                         }
                     } catch(error){
                         console.log(error)

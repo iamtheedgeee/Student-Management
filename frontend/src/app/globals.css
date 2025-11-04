@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+
+.card {
+  @apply p-6 bg-white rounded-lg shadow-md;
+}
+
+.heading-primary {
+  @apply text-3xl font-bold text-gray-900 text-center;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
