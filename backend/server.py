@@ -5,8 +5,8 @@ from models import Scores
 from db import db
 import os
 from dotenv import load_dotenv
-load_dotenv()
-#load_dotenv(".env.production")
+#load_dotenv()
+load_dotenv(".env.production")
 
 app=Flask(__name__)
 
@@ -27,9 +27,9 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-##with app.app_context():
-##   Scores.__table__.drop(db.engine)
-##    db.create_all()
+with app.app_context():
+    Scores.__table__.drop(db.engine)
+    db.create_all()
 
 def get_grade(total):
     if total>=70:
@@ -135,7 +135,7 @@ def delete_users():
             db.session.delete(score)
 
         db.session.commit()
-        return jsonify(message=f"Deleted {len(score)} results successfully"), 200
+        return jsonify(message=f"Deleted {len(scores)} results successfully"), 200
     except Exception as e:
         print(e)
         db.session.rollback()
