@@ -24,8 +24,8 @@ export function ModalProvider({children}:{children:ReactNode}){
         <ModalContext.Provider value={value}>
             {children}
             {modal&&
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                <div className="bg-white p-6 rounded-xl shadow-lg min-w-[300px]">
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50" onClick={hideModal}>
+                <div className="bg-white p-6 rounded-xl shadow-lg min-w-[300px]" onClick={(e)=>{e.stopPropagation()}}>
                     {modal}
                 </div>
                 </div>

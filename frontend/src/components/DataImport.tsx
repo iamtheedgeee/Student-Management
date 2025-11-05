@@ -36,11 +36,10 @@ export default function DataImport(){
 
     }
     return (
-        <div>
             <div>
                 <div>Upload a Spreadsheet file</div>
                 {!loading?
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 border border-blue-400 p-[5px]">
                         <input
                             id='file'
                             type='file'
@@ -55,6 +54,5 @@ export default function DataImport(){
                     </div>
                 }
             </div>
-        </div>
     )
 }

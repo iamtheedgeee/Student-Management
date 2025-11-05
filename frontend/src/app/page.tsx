@@ -8,7 +8,6 @@ export default function Home() {
     <div>
       Welcome to Data Entry
       <DataInputForm/>
-      <DataImport/>
       <DataView/>
     </div>
   );

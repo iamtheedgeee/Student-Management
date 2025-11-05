@@ -140,5 +140,23 @@ def delete_users():
         print(e)
         db.session.rollback()
         return jsonify(message="Error in deleting")
+
+@app.route("/edit-result/<int:id>", methods=['PATCH'])
+def edit_result(id):
+    score=Scores.query.get_or_404(id)
+
+    data=request.get_json()
+
+    field_name=data["name"]
+    data_value=data["data"]
+
+    try:
+        setattr(score,field_name,data_value)
+        db.session.commit()
+        return jsonify(message="success"),200
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return jsonify(message="failure"),400
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)),debug=True)

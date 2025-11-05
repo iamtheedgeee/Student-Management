@@ -24,6 +24,8 @@ export default function DataView(){
             getResults()
         }catch(error){
             alert('something went wrong in deleting')
+        }finally{
+            setSelectedList([])
         }
     }
 
@@ -51,13 +53,22 @@ export default function DataView(){
         <>
             {
                 data.length>0?
-                <div>
+                <div className="flex flex-col gap-y-3 ">
                     {selectedList.length>0&&
-                        <div>
+                        <div className="flex gap-x-8 border border-red-400 rounded-md justify-center items- w-fit m-auto p-[5px]">
                             <input type='checkbox' checked={checked} onChange={handleChange}/>
-                            <button onClick={handleDelete}>delete</button>
+                            <button onClick={handleDelete}>Delete  {selectedList.length}</button>
                         </div>
                     }
+                    <div className="flex gap-x-8 border border-black rounded-md justify-start items-center">
+                        <div className="w-[35px]  text-center">S/N</div>
+                        <div className="w-[20%] text-left  ">Student Name</div>
+                        <div className="w-[35px]  text-center">CA</div>
+                        <div className="w-[35px]  text-center">CA</div>
+                        <div className="w-[35px]  text-center">Exams</div>
+                        <div className="w-[35px]  text-center">Total</div>
+                        <div className="w-[35px]  text-center">Grade</div>
+                    </div>
                     {data.map((item)=>{
                         return <DataItem result={item} key={item.id}/>
                     })}

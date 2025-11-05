@@ -4,6 +4,8 @@ import * as Yup from 'yup'
 import { postResults } from "@/services/api"
 import { Score } from "@/services/api"
 import { useDataContext } from "@/services/DataContext"
+import { useModal } from "@/services/ModalContext"
+import DataImport from "./DataImport"
 
 const ScoreSchema=Yup.object().shape({
     student_name:Yup.string()
@@ -32,8 +34,14 @@ const initialValues:Score={
     second_assessment:'',
     exam_score:''
 }
+
+
 export default function DataInputForm(){
     const {getResults}=useDataContext()
+    const {showModal}=useModal()
+    function handleImport(){
+        showModal(<DataImport/>)
+    }
     return(
         <div className="flex flex-col justify-center items-center border rounded-sm border-black p-[5px] gap-y-<5>">
             <h4 className="text-center border border-black rounded-sm">Input Student Data</h4>
@@ -76,6 +84,7 @@ export default function DataInputForm(){
                         </Form>
                 )}
             </Formik>
+            <button onClick={handleImport}>Import</button>
 
         </div>
     )
