@@ -1,3 +1,4 @@
+"use client"
 interface ConfirmationProps{
     onConfirm:()=>any;
     onCancel:()=>any;

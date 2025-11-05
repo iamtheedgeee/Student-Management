@@ -3,8 +3,11 @@ import { getData, UScore,deleteData } from "@/services/api";
 import { useEffect, useState } from "react";
 import DataItem from "./DataItem";
 import { useDataContext } from "@/services/DataContext";
+import { useModal } from "@/services/ModalContext";
+import Confirmation from "./Confirmation";
 export default function DataView(){
     const {selectedList,setSelectedList,data,loading,error,getResults}=useDataContext()
+    const {showModal,hideModal}=useModal()
     const checked=data.length===selectedList.length
     function handleChange(e:React.ChangeEvent<HTMLInputElement>){
         setSelectedList(prev=>
@@ -15,13 +18,22 @@ export default function DataView(){
             })
         )
     }
-    async function handleDelete(){
+    async function deleteItems(){
         try{
             await deleteData(selectedList)
             getResults()
         }catch(error){
             alert('something went wrong in deleting')
         }
+    }
+
+    function handleDelete(){
+        showModal(
+            <Confirmation message={`Are you sure you want to delete ${selectedList.length} Items`}
+                onConfirm={deleteItems}
+                onCancel={hideModal}
+            />
+            )
     }
     useEffect(()=>{
         getResults()
