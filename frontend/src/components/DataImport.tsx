@@ -20,16 +20,12 @@ export default function DataImport(){
         formData.append("spreadSheetFile",file)
         try{
             const count=await sendFileForImport(formData)
-            if(count){
-                setLoading(false)
-                alert(`Successfully imported ${count} transactions`)
-            }
+            setLoading(false)
+            alert(`Successfully imported ${count} transactions`)
         } catch(error){
             setLoading(false)
             if(error instanceof Error){
                 alert(error.message)
-            }else{
-                alert('Something Went Wrong')
             }
         }
 

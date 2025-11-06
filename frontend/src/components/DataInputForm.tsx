@@ -23,7 +23,7 @@ const ScoreSchema=Yup.object().shape({
         .required("Second assessment is requried"),
     exam_score:Yup.number()
         .typeError("Numeric Input Only")
-        .max(60,"Number must be less than 60")
+        .max(70,"Number must be less than 70")
         .min(0,"Number must be greater than 0")
         .required("Exam Score is requried")
     
@@ -52,14 +52,12 @@ export default function DataInputForm(){
                     setStatus('')
                     try{
                         const data=await postResults(values)
-                        if(data){
-                            console.log(data)
-                            setStatus('success')
-                            getResults()
-                        }
+                        setStatus('success')
+                        getResults()
                     } catch(error){
-                        console.log(error)
-                        setStatus('Something Went Wrong')
+                        if(error instanceof Error){
+                            setStatus(error.message)
+                        }
                     } finally{
                         setSubmitting(false)
                     }

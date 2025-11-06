@@ -25,15 +25,14 @@ export const DataProvider=({children}:ProviderProps)=>{
             setLoading(true)
             setError(null)
             const results= await getData()
-            if(results){
-                setData(results)
+            setData(results)
+        }catch(error){
+            if(error instanceof Error){
+                setError(error.message) 
             }
-        }catch(error:unknown){
-            setError("something went wrong")
         }finally{
             setLoading(false)
         }
-        
     }
     const value={
         selectedList,

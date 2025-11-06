@@ -23,7 +23,8 @@ export default function DataView(){
             await deleteData(selectedList)
             getResults()
         }catch(error){
-            alert('something went wrong in deleting')
+            if(error instanceof Error)
+            alert(error.message)
         }finally{
             setSelectedList([])
         }
