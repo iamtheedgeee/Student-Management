@@ -42,7 +42,7 @@ export default function DataView(){
         getResults()
     },[])
     if(loading){
-        return <div>Loading</div>
+       if(data.length===0)return <div>Loading</div>
     }
 
     if(error){

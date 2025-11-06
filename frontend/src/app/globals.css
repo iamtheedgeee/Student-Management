@@ -11,7 +11,7 @@
 
 @layer components{
   button{
-    @apply px-4  rounded-sm bg-blue-600 text-white  hover:bg-blue-700 transition
+    @apply px-4  rounded-sm bg-blue-600 text-white  hover:bg-blue-700 transition cursor-pointer
   }
 }
 
