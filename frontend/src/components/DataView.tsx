@@ -54,7 +54,7 @@ export default function DataView(){
 
     if(data.length>0){
         return(
-        <>
+        <div className='border border-yellow-300'>
             <div>
                 <div>Table:<input type="checkbox" checked={mode==="T"} onChange={
                     ()=>{
@@ -67,9 +67,7 @@ export default function DataView(){
                     }
                 }/></div>
                 <div>
-                    <button onClick={()=>{
-                        exportToExcel(data)
-                    }}>Export</button>
+                    
                 </div>
 
             </div>
@@ -82,6 +80,7 @@ export default function DataView(){
                         <button onClick={handleDelete}>Delete  {selectedList.length}</button>
                     </div>
                 }
+                <div className="max-h-[400px] overflow-auto">
                 <div className="flex gap-x-8 border border-black rounded-md justify-start items-center">
                     <div className="w-[35px]  text-center">S/N</div>
                     <div className="w-[20%] text-left  ">Student Name</div>
@@ -94,10 +93,11 @@ export default function DataView(){
                 {data.map((item)=>{
                     return <DataItem result={item} key={item.id}/>
                 })}
+                </div>
             </div>
             :<DataChart results={data}/>
             }
-        </>      
+        </div>      
         )
     }else{
         return <div>No data</div>

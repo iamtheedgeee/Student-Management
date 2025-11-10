@@ -9,11 +9,6 @@
   @apply text-3xl font-bold text-gray-900 text-center;
 }
 
-@layer components{
-  button{
-    @apply px-4  rounded-sm bg-blue-600 text-white  hover:bg-blue-700 transition cursor-pointer
-  }
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -126,10 +121,17 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 box-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  section{
+    @apply space-y-4;
+  }
+
+  button{
+    @apply px-4  rounded-sm bg-blue-600 text-white  hover:bg-blue-700 transition cursor-pointer
   }
 }
 

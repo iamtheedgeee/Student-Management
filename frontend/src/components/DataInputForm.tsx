@@ -64,7 +64,7 @@ export default function DataInputForm(){
                 }}
             >
                 {({isSubmitting,errors,status})=>(
-                        <Form className='flex flex-col items-center border-yellow border-[4px]'>
+                        <Form className='flex flex-col items-center border-yellow'>
                             <Field type='text' name='student_name' placeholder='Student Name'/>
                             <ErrorMessage name='student_name'/>
 
@@ -82,7 +82,6 @@ export default function DataInputForm(){
                         </Form>
                 )}
             </Formik>
-            <button onClick={handleImport}>Import</button>
 
         </div>
     )
