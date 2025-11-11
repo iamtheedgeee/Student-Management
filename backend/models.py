@@ -43,8 +43,8 @@ def validate_and_calculate(mapper, connection, target):
                 raise ValueError(f"{field} must be between 0 and 70")
     if field=="student_name":
         value=str(getattr(target,field))
-        if(len(value)>15):
-            raise ValueError(f"Student name must not be more than 15 characters") 
+        if(len(value)>25):
+            raise ValueError(f"Student name must not be more than 25 characters") 
     scores = [
         int(getattr(target, "first_assessment"))or 0,
         int(getattr(target, "second_assessment"))or 0,

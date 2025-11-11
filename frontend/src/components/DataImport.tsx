@@ -14,7 +14,6 @@ export default function DataImport(){
 
     async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        setLoading(true)
         if(!file){
             alert("Please select a file")
             return
@@ -22,6 +21,7 @@ export default function DataImport(){
         const formData= new FormData()
         formData.append("spreadSheetFile",file)
         try{
+            setLoading(true)
             const count=await sendFileForImport(formData)
             getResults()
             alert(`Successfully imported ${count} transactions`)

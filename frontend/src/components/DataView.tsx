@@ -53,7 +53,7 @@ export default function DataView(){
 
     if(data.length>0){
         return(
-        <div className="flex flex-col gap-y-2">
+        <div>
             <div className="border border-blue-300 flex gap-10 justify-between rounded-sm w-fit m-auto p-1">
                 <div className=" border-black">Table:<input type="checkbox" checked={mode==="T"} onChange={
                     ()=>{
@@ -68,9 +68,9 @@ export default function DataView(){
             </div>
             {
             mode==="T"
-            ?<div className="flex flex-col gap-y-3">
+            ?<div className="flex flex-col gap-y-2">
                 {selectedList.length>0&&
-                    <div className="flex gap-x-8 border border-red-400 rounded-md justify-center items- w-fit m-auto p-[5px]">
+                    <div className="flex gap-x-8 border border-red-400 rounded-md justify-center items- w-fit m-auto p-[5px] mt-2">
                         <input type='checkbox' checked={checked} onChange={handleChange}/>
                         <button onClick={handleDelete}>Delete  {selectedList.length}</button>
                     </div>

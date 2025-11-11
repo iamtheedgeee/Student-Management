@@ -22,7 +22,7 @@ export default function Home() {
           <h3 className="font-large text-2xl">Result Management</h3>
           <div className="flex gap-2">
             <button onClick={handleImport}>Import</button>                   
-            <button onClick={handleExport} disabled={data.length===0}>Export</button>
+            <button onClick={handleExport} disabled={data.length===0} className={data.length===0?"bg-gray-500 cursor-auto hover:bg-gray-500":""}>Export</button>
           </div>
       </div>
       <div className="flex justify-between p-2 md:p-4 ">

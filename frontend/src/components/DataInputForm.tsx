@@ -10,7 +10,7 @@ import DataImport from "./DataImport"
 
 const ScoreSchema=Yup.object().shape({
     student_name:Yup.string()
-        .max(15,"Name must not be more than 15 characters")
+        .max(25,"Name must not be more than 25 characters")
         .required("Student Name is required"),
     first_assessment:Yup.number()
         .typeError("Numeric Input Only")
