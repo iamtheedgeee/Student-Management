@@ -7,7 +7,7 @@ import { useModal } from "@/services/ModalContext";
 import Confirmation from "./Confirmation";
 import DataChart from "./DataChart";
 export default function DataView(){
-    const {selectedList,setSelectedList,data,loading,setLoading,error,getResults}=useDataContext()
+    const {selectedList,setSelectedList,data,loading,error,getResults}=useDataContext()
     const [mode,setMode]=useState("T")
     const {showModal,hideModal}=useModal()
     const checked=data.length===selectedList.length
@@ -22,7 +22,6 @@ export default function DataView(){
     }
     async function deleteItems(){
         try{
-            setLoading(true)
             await deleteData(selectedList)
             getResults()
         }catch(error){
@@ -30,7 +29,6 @@ export default function DataView(){
             alert(error.message)
         }finally{
             setSelectedList([])
-            setLoading(false)
         }
     }
 
@@ -46,7 +44,7 @@ export default function DataView(){
         getResults()
     },[])
     if(loading){
-       /*if(data.length===0)*/return <div className="h-[400px] w-[400px] flex display-flex justify-center items-center font-medium text-lg border border-black">Loading....</div>
+       if(data.length===0)return <div className="h-[400px] w-[400px] flex display-flex justify-center items-center font-medium text-lg border border-black">Loading....</div>
     }
 
     if(error){
@@ -55,7 +53,7 @@ export default function DataView(){
 
     if(data.length>0){
         return(
-        <div>
+        <div className="flex flex-col gap-y-2">
             <div className="border border-blue-300 flex gap-10 justify-between rounded-sm w-fit m-auto p-1">
                 <div className=" border-black">Table:<input type="checkbox" checked={mode==="T"} onChange={
                     ()=>{
@@ -70,7 +68,7 @@ export default function DataView(){
             </div>
             {
             mode==="T"
-            ?<div className="flex flex-col gap-y-3 ">
+            ?<div className="flex flex-col gap-y-3">
                 {selectedList.length>0&&
                     <div className="flex gap-x-8 border border-red-400 rounded-md justify-center items- w-fit m-auto p-[5px]">
                         <input type='checkbox' checked={checked} onChange={handleChange}/>
@@ -80,12 +78,12 @@ export default function DataView(){
                 <div className="max-h-[400px] overflow-auto">
                 <div className="flex gap-x-8 border border-black rounded-md justify-start items-center">
                     <div className="w-[35px]  text-center">S/N</div>
-                    <div className="w-[20%] text-left border">Student Name</div>
-                    <div className="w-[35px]  text-center border">CA</div>
-                    <div className="w-[35px]  text-center border">CA</div>
-                    <div className="w-[35px]  text-center border">Exams</div>
-                    <div className="w-[35px]  text-center border">Total</div>
-                    <div className="w-[35px]  text-center border">Grade</div>
+                    <div className="w-[20%] text-left ">Student Name</div>
+                    <div className="w-[35px]  text-center ">CA</div>
+                    <div className="w-[35px]  text-center ">CA</div>
+                    <div className="w-[35px]  text-center ">Exams</div>
+                    <div className="w-[35px]  text-center ">Total</div>
+                    <div className="w-[35px]  text-center ">Grade</div>
                 </div>
                 {data.map((item)=>{
                     return <DataItem result={item} key={item.id}/>

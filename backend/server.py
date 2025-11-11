@@ -78,13 +78,19 @@ def get_result():
 @app.route('/post-result',methods=['POST'])
 def input_result():
     data=request.get_json()
-    new_score=Scores(
-        student_name=data['student_name'],
-        first_assessment=data['first_assessment'],
-        second_assessment=data['second_assessment'],
-        exam_score=data['exam_score'],
-    )
-    db.session.add(new_score)
+    name=data['student_name']
+    score=Scores.query.filter_by(student_name=name).first()
+    if score is not None:
+        for field in ['first_assessment','second_assessment','exam_score']:
+            setattr(score,field,data[field])
+    else:
+        new_score=Scores(
+            student_name=data['student_name'],
+            first_assessment=data['first_assessment'],
+            second_assessment=data['second_assessment'],
+            exam_score=data['exam_score'],
+        )
+        db.session.add(new_score)
     db.session.commit()
     return jsonify({
         "success":True,
