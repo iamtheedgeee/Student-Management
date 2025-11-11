@@ -1,9 +1,12 @@
 'use client'
 import { ReactEventHandler, useState } from 'react'
-import { sendFileForImport } from '@/services/api'
+import {  sendFileForImport } from '@/services/api'
+import { useDataContext } from '@/services/DataContext'
 export default function DataImport(){
     const [file,setFile]=useState<File | null>(null)
     const [loading,setLoading]=useState(false)
+    const {getResults}=useDataContext()
+
 
     function handleFile(e:React.ChangeEvent<HTMLInputElement>){
         setFile(e.target.files?.[0]||null)
@@ -20,13 +23,14 @@ export default function DataImport(){
         formData.append("spreadSheetFile",file)
         try{
             const count=await sendFileForImport(formData)
-            setLoading(false)
+            getResults()
             alert(`Successfully imported ${count} transactions`)
         } catch(error){
-            setLoading(false)
             if(error instanceof Error){
                 alert(error.message)
             }
+        } finally{
+            setLoading(false)
         }
 
 

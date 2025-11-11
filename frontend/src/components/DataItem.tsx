@@ -83,7 +83,7 @@ export default function DataItem({result}:{result:UScore}){
     return (
         <div className="flex gap-x-8 border border-black rounded-md justify-start items-center">
             <div className="w-[35px]  text-center">{result.id}</div>
-            <div className="w-[20%] text-left border "><Display name="student_name" data={result.student_name} id={result.id}/></div>
+            <div className="w-[20%] text-left border"><Display name="student_name" data={result.student_name} id={result.id}/></div>
             <div className="w-[35px]  text-center border "><Display name="first_assessment" data={result.first_assessment} id={result.id}/></div>
             <div className="w-[35px]  text-center border "><Display name="second_assessment" data={result.second_assessment} id={result.id}/></div>
             <div className="w-[35px]  text-center border "><Display name="exam_score" data={result.exam_score} id={result.id}/></div>

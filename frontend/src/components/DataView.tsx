@@ -6,9 +6,8 @@ import { useDataContext } from "@/services/DataContext";
 import { useModal } from "@/services/ModalContext";
 import Confirmation from "./Confirmation";
 import DataChart from "./DataChart";
-import { exportToExcel } from "@/services/services";
 export default function DataView(){
-    const {selectedList,setSelectedList,data,loading,error,getResults}=useDataContext()
+    const {selectedList,setSelectedList,data,loading,setLoading,error,getResults}=useDataContext()
     const [mode,setMode]=useState("T")
     const {showModal,hideModal}=useModal()
     const checked=data.length===selectedList.length
@@ -23,6 +22,7 @@ export default function DataView(){
     }
     async function deleteItems(){
         try{
+            setLoading(true)
             await deleteData(selectedList)
             getResults()
         }catch(error){
@@ -30,6 +30,7 @@ export default function DataView(){
             alert(error.message)
         }finally{
             setSelectedList([])
+            setLoading(false)
         }
     }
 
@@ -45,31 +46,27 @@ export default function DataView(){
         getResults()
     },[])
     if(loading){
-       if(data.length===0)return <div>Loading</div>
+       /*if(data.length===0)*/return <div className="h-[400px] w-[400px] flex display-flex justify-center items-center font-medium text-lg border border-black">Loading....</div>
     }
 
     if(error){
-        return <div>{error}</div>
+        return <div className="h-[400px] w-[400px] flex display-flex justify-center items-center font-medium text-lg border border-black text-red-700">{error}</div>
     }
 
     if(data.length>0){
         return(
-        <div className='border border-yellow-300'>
-            <div>
-                <div>Table:<input type="checkbox" checked={mode==="T"} onChange={
+        <div>
+            <div className="border border-blue-300 flex gap-10 justify-between rounded-sm w-fit m-auto p-1">
+                <div className=" border-black">Table:<input type="checkbox" checked={mode==="T"} onChange={
                     ()=>{
                         setMode("T")
                     }
                 }/></div>
-                <div>Chart:<input type="checkbox" checked={mode==="C"} onChange={
+                <div className=" border-black">Chart:<input type="checkbox" checked={mode==="C"} onChange={
                     ()=>{
                         setMode("C")
                     }
                 }/></div>
-                <div>
-                    
-                </div>
-
             </div>
             {
             mode==="T"
@@ -83,12 +80,12 @@ export default function DataView(){
                 <div className="max-h-[400px] overflow-auto">
                 <div className="flex gap-x-8 border border-black rounded-md justify-start items-center">
                     <div className="w-[35px]  text-center">S/N</div>
-                    <div className="w-[20%] text-left  ">Student Name</div>
-                    <div className="w-[35px]  text-center">CA</div>
-                    <div className="w-[35px]  text-center">CA</div>
-                    <div className="w-[35px]  text-center">Exams</div>
-                    <div className="w-[35px]  text-center">Total</div>
-                    <div className="w-[35px]  text-center">Grade</div>
+                    <div className="w-[20%] text-left border">Student Name</div>
+                    <div className="w-[35px]  text-center border">CA</div>
+                    <div className="w-[35px]  text-center border">CA</div>
+                    <div className="w-[35px]  text-center border">Exams</div>
+                    <div className="w-[35px]  text-center border">Total</div>
+                    <div className="w-[35px]  text-center border">Grade</div>
                 </div>
                 {data.map((item)=>{
                     return <DataItem result={item} key={item.id}/>
@@ -100,7 +97,7 @@ export default function DataView(){
         </div>      
         )
     }else{
-        return <div>No data</div>
+        return <div className="h-[400px] w-[400px] flex display-flex justify-center items-center font-medium text-lg border border-black">No data</div>
     }
 
 }

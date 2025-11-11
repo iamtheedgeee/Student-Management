@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="h-screen">
       <div className="flex justify-between p-4 md:p-6">
-          <h3>Result Management</h3>
+          <h3 className="font-large text-2xl">Result Management</h3>
           <div className="flex gap-2">
             <button onClick={handleImport}>Import</button>                   
             <button onClick={handleExport} disabled={data.length===0}>Export</button>

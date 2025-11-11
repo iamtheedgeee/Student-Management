@@ -6,6 +6,7 @@ interface DataContextType{
     setSelectedList:React.Dispatch<React.SetStateAction<string[]>>;
     data:UScore[];    
     loading:boolean;
+    setLoading:React.Dispatch<React.SetStateAction<boolean>>;
     error:string|null;
     getResults:()=>Promise<void>
 }
@@ -39,6 +40,7 @@ export const DataProvider=({children}:ProviderProps)=>{
         setSelectedList,
         data,
         loading,
+        setLoading,
         error,
         getResults
     }
